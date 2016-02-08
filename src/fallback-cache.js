@@ -7,15 +7,15 @@ import NullStorageProvider from './cache-providers/null-storage-provider';
  * Common caching mechanism with fallback from localStorage -> sessionStorage -> memory
  *
  * options:
- *   - prefix           (default: --tpt-cache--)
+ *   - prefix           (default: --fallback-cache--)
  *   - prefixSeparator  (default: |)
  *   - expiration       (optional)
  *   - providers        (default: [LocalStorage, SessionStorage, Memory])
 **/
-class Cache {
+class FallbackCache {
   constructor(options = {}) {
     // if (options == null) { options = {}; }
-    if (!options.prefix) { options.prefix = '--tpt-cache--'; }
+    if (!options.prefix) { options.prefix = '--fallback-cache--'; }
     if (!options.prefixSeparator) { options.prefixSeparator = '|'; }
 
     const providers = options.providers || [
@@ -30,10 +30,10 @@ class Cache {
 
   // moved out so that decorators will work
   // static SECOND = 1000;
-  // static MINUTE = Cache.SECOND * 60;
-  // static HOUR = Cache.MINUTE * 60;
-  // static DAY = Cache.HOUR * 24;
-  // static WEEK = Cache.DAY * 7;
+  // static MINUTE = FallbackCache.SECOND * 60;
+  // static HOUR = FallbackCache.MINUTE * 60;
+  // static DAY = FallbackCache.HOUR * 24;
+  // static WEEK = FallbackCache.DAY * 7;
 
   static Providers = {
     LocalStorage: LocalStorageProvider,
@@ -95,10 +95,10 @@ class Cache {
   }
 }
 
-Cache.SECOND = 1000;
-Cache.MINUTE = Cache.SECOND * 60;
-Cache.HOUR = Cache.MINUTE * 60;
-Cache.DAY = Cache.HOUR * 24;
-Cache.WEEK = Cache.DAY * 7;
+FallbackCache.SECOND = 1000;
+FallbackCache.MINUTE = FallbackCache.SECOND * 60;
+FallbackCache.HOUR = FallbackCache.MINUTE * 60;
+FallbackCache.DAY = FallbackCache.HOUR * 24;
+FallbackCache.WEEK = FallbackCache.DAY * 7;
 
-export default Cache;
+export default FallbackCache;
